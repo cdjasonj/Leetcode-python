@@ -1,22 +1,32 @@
 #在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留
 # ，返回链表头指针。 例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+
+
 from tools import LinkList
-def deleteDuplication(pHead):
-    p = pHead
 
-    while p and p.next:
-        if p.val == p.next.val:
-            p = del_node(p)
-        p = p.next
 
-    return pHead
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
 
-def del_node(head):
-    temp = head
-    while temp and temp.val == head.val:
-        temp = temp.next
-    head.next = temp
-    return head
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        p = head
+        while p and p.next and p.next.next:
+            if p.next.val == p.next.next.val:
+                self.del_node(p,p.next.val)
+            p = p.next
+        return head
+
+    def del_node(self, head,val):
+        # 找到第一个val != head.val
+        temp = head.next
+        while temp and temp.val == val:
+            temp = temp.next
+        head.next = temp
+
+# write code here
 
 
 if __name__ =='__main__':

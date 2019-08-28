@@ -7,6 +7,9 @@ def FindKthToTail(head,k):
     while p and num != k:
         p = p.next
         num+=1
+
+    if not p :
+        return None # 记得判断一下k是否大于链表长度
     while p.next : #遍历到最后一个之前
         p = p.next
         q = q.next

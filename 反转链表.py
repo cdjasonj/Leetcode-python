@@ -15,3 +15,4 @@ class Solution:
             new_head.next = p
             p = pr
         return new_head.next
+

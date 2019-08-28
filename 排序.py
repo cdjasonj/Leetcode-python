@@ -69,26 +69,45 @@ def Heap_Sort(list_node):
         list_node[i] = temp
         Sift(list_node,0,i-1)
         i -= 1
+#
+# def BubbleSort(list_node):
+#     #时间复杂度 平均On2, 最坏On2, 最好On
+#     #结束条件，一次遍历没有发生交换，代表着全局有序。
+#     i = 0
+#     while i < len(list_node):
+#         exchange = 0
+#         j = len(list_node) - 1
+#
+#         while j > i :
+#             if list_node[j] < list_node[j-1]:
+#                 temp = list_node[j]
+#                 list_node[j] = list_node[j-1]
+#                 list_node[j-1] = temp
+#                 exchange = 1
+#             j -= 1
+#         if exchange == 0:
+#             break
+#         else:
+#             i += 1
+
+
+#冒泡排序:
 
 def BubbleSort(list_node):
-    #时间复杂度 平均On2, 最坏On2, 最好On
-    #结束条件，一次遍历没有发生交换，代表着全局有序。
-    i = 0
-    while i < len(list_node):
-        exchange = 0
-        j = len(list_node) - 1
 
-        while j > i :
+    for i in range(0,len(list_node)):
+        flag =0
+
+        j= len(list_node) - 1
+        while j > i:
             if list_node[j] < list_node[j-1]:
                 temp = list_node[j]
                 list_node[j] = list_node[j-1]
                 list_node[j-1] = temp
-                exchange = 1
+                flag = 1
             j -= 1
-        if exchange == 0:
+        if flag == 0:
             break
-        else:
-            i += 1
 
 def Quick_Sort(list_node,start,end):
 
@@ -98,12 +117,14 @@ def Quick_Sort(list_node,start,end):
     left = start
     right = end
     temp = list_node[start]
-    while left < right:
-        while left < right and list_node[right] >= temp: #注意这个等于符号
+
+
+    while left != right:
+        while left < right and list_node[right] > temp: #注意这个等于符号
             right -= 1
         list_node[left] = list_node[right]
 
-        while left < right and list_node[left] <= temp:
+        while left < right and list_node[left] < temp:
             left +=1
         list_node[right] = list_node[left]
 
@@ -116,12 +137,12 @@ def Quick_Sort(list_node,start,end):
 #     埋坑
 
 if __name__ == '__main__':
-    a = [4,5,10,2,11,24,2,3,1,20]
+    a = [46,79,56,39,40,84]
     # insert_sort(a)
     # shell_sort(a)
     #selection_sort(a)
     # Heap_Sort(a)
     # BubbleSort(a)
-    # Quick_Sort(a,0,len(a)-1)
+    Quick_Sort(a,0,len(a)-1)
     #归并排序埋坑
     print(a)

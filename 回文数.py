@@ -25,18 +25,37 @@ my solution
 直接用str解决了。。。
 时间on(来自比较) 空间On
 """
-class Solution:
-    def isPalindrome(self, x: int) -> bool:
-        if x<0:
-            return False
-        else:
-            if str(x)[::-1] == str(x):
-                return True
-            else:
-                return False
+
 
 """
 其他思路。
 数字解法，每次比较-1,1 .-2 ,2 的数字是否匹配。
 o(n) o(1)
 """
+
+
+#注意python 里的 // 和 /
+
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+
+        # 将这个数重排一下，判断是否和重排前相等.
+        y, s = 0, 0  # y保存重排之后的数，s 保存余数
+
+        # 当x < 0 时肯定时错的
+        if x < 0:
+            return False
+
+        s = x
+
+        while s != 0:
+            y = y * 10 + s % 10
+            s = s // 10
+
+        if y != x:
+            return False
+        else:
+            return True
+
+
+Solution().isPalindrome(121)
