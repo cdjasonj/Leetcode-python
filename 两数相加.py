@@ -20,93 +20,40 @@
 my solution
 """
 
-#没刷出来，之后再刷，刚开始刷有点手生
-
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
-#这个超时了
-class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        x = self.get_num(l1) + self.get_num(l2)
-        # 创建头链表
-        l3 = ListNode(x % 10)
-        x %= 10
-        while x:
-            temp = ListNode(x % 10)
-            l3.next = temp
-            l3 = temp
-            x %= 10
-        return
-
-    def get_num(self, l_node):
-        num = 0
-        temp = 1
-        while l_node:
-            num += l_node.val * temp
-            temp *= 10
-            l_node = l_node.next
-        return num
-
 #
 # Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+    def addTwoNumbers(self, l1, l2):
+        if not l1 or not l2 :
+            return None
+        p,q = l1,l2
+        new_head = ListNode(0)
+        n = new_head
+        carry = 0
+        while p or q:
+            if p :
+                num1 = p.val
+                p = p.next
+            else:
+                num1 = 0
 
-        p1, p2 = l1, l2
+            if q :
+                num2 = p.val
+                q = q.next
+            else:
+                num2 = 0
 
-        flag = 0  # 用一个flag 来判断进位
-        num1, num2 = p1.val, p2.val
-        if val >= 10:
-            val = (num1 + num2) % 10 + flag
-        flag = 1
-        else:
-        val = (num1 + num2)
+            curr = (num1+num2+carry)%10
+            carry = (num1+num2+carry)/10
+            n.next = ListNode(curr)
+            n = n.next
 
-    # 创造头节点
-    l3 = ListNode(val)
-    p2, p1 = p1.next, p2.next
-    p = l3
-    while p1 and p2:
+        if carry != 0 :
+            n.next = ListNode(1)
+            n = n.next
+        return new_head.next
 
-        num1, num2 = p1.val, p2.val
-        val = num1 + num2 + flag
-        if val >= 10:
-            flag = 1
-            val = val % 10
-        else:
-            val = (num1 + num2)
-
-        p.next = ListNode(val)
-        p = p.next
-        p1, p2 = p1.next, p2.next
-
-    # 最高为进位判断
-    if flag != 0:
-        p.next = ListNode(flag)
-        p = p.next
-
-    while p1:
-        p.next = ListNode(p1.val)
-        p = p.next
-        p1 = p1.next
-
-    while p2:
-        p.next = ListNode(p2.val)
-        p = p.next
-        p2 = p2.next
-
-    return l3
