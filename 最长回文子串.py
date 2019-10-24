@@ -15,6 +15,7 @@ class Solution:
         for i in range(1,len(s)):
             for j in dp[i - 1]:
                 # j == i-1时要进行两次判断，
+                # 当为两个字符的时候，判断两个字符是否相等
                 if j == i - 1:
                     if s[j] == s[i]:
                         dp[i].append(j)
